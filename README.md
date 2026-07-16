@@ -2,7 +2,7 @@
 
 ![npm](https://img.shields.io/npm/v/indonesian-date) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/indonesian-date) ![TypeScript](https://img.shields.io/badge/TypeScript-✅-blue) ![Zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
 
-> Format tanggal & waktu ala Indonesia. **Zero dependencies**, **TypeScript**, **ESM + CJS**.
+> Indonesian date formatting & utilities — "Senin, 16 Juli 2026", "2 hari yang lalu", WIB/WITA/WIT. **Zero dependencies**, **TypeScript**, **ESM + CJS**.
 
 ---
 
@@ -26,31 +26,31 @@ const { format, formatLong, relativeTime, convertTimezone } = require('indonesia
 
 ---
 
-## ✨ Fitur
+## ✨ Features
 
-| Fitur | Status |
+| Feature | Status |
 |---|---|
-| Format tanggal Indonesia (dddd, DD MMMM YYYY) | ✅ |
+| Indonesian date formatting (dddd, DD MMMM YYYY) | ✅ |
 | Relative time ("2 hari yang lalu", "3 jam lagi") | ✅ |
-| Timezone WIB / WITA / WIT | ✅ |
-| Konversi antar timezone | ✅ |
-| Hitung umur (tahun, bulan, hari) | ✅ |
-| Cek weekend (Sabtu/Minggu) | ✅ |
-| Nama hari & bulan Indonesia | ✅ |
-| Range tanggal | ✅ |
+| WIB / WITA / WIT timezone support | ✅ |
+| Convert between timezones | ✅ |
+| Age calculator (years, months, days) | ✅ |
+| Weekend detection (Saturday/Sunday) | ✅ |
+| Indonesian day & month names | ✅ |
+| Date ranges | ✅ |
 | TypeScript (ESM + CJS) | ✅ |
 | **Zero dependencies** | ✅ |
 
 ---
 
-## 🚀 Contoh Cepat
+## 🚀 Quick Start
 
 ```ts
 import { format, formatLong, formatSlash, relativeTime, convertTimezone, getAge } from 'indonesian-date'
 
 const now = new Date('2026-07-16T15:30:00')
 
-// Format standar
+// Standard formats
 formatLong(now)                     // "Kamis, 16 Juli 2026"
 format(now, 'DD/MM/YYYY')          // "16/07/2026"
 format(now, 'HH:mm')               // "15:30"
@@ -69,42 +69,42 @@ format(now, 'dddd, DD MMMM YYYY HH:mm Z', 'WITA')
 convertTimezone(now, 'WIB', 'WITA')
 // → Date adjusted +1 hour
 
-// Hitung umur
+// Age calculator
 getAge(new Date('2000-01-15'))
 // → { years: 26, months: 6, days: 1 }
 ```
 
 ---
 
-## 🔤 Token Format
+## 🔤 Format Tokens
 
-Token yang bisa dipakai di fungsi `format()`:
+Available tokens for the `format()` function:
 
-| Token | Output | Keterangan |
-|-------|--------|------------|
-| `dddd` | `Senin`, `Selasa`, … | Nama hari lengkap |
-| `ddd` | `Sen`, `Sel`, … | Nama hari singkat |
-| `DD` | `01`–`31` | Tanggal (leading zero) |
-| `D` | `1`–`31` | Tanggal (tanpa leading zero) |
-| `MMMM` | `Januari`, `Februari`, … | Nama bulan lengkap |
-| `MMM` | `Jan`, `Feb`, … | Nama bulan singkat |
-| `MM` | `01`–`12` | Bulan (leading zero) |
-| `M` | `1`–`12` | Bulan (tanpa leading zero) |
-| `YYYY` | `2026` | Tahun 4 digit |
-| `YY` | `26` | Tahun 2 digit |
-| `HH` | `00`–`23` | Jam (24 jam, leading zero) |
-| `H` | `0`–`23` | Jam (24 jam) |
-| `hh` | `01`–`12` | Jam (12 jam, leading zero) |
-| `h` | `1`–`12` | Jam (12 jam) |
-| `mm` | `00`–`59` | Menit (leading zero) |
-| `m` | `0`–`59` | Menit |
-| `ss` | `00`–`59` | Detik (leading zero) |
-| `s` | `0`–`59` | Detik |
-| `A` | `AM` / `PM` | AM/PM kapital |
+| Token | Output | Description |
+|-------|--------|-------------|
+| `dddd` | `Senin`, `Selasa`, … | Full day name |
+| `ddd` | `Sen`, `Sel`, … | Short day name |
+| `DD` | `01`–`31` | Day (leading zero) |
+| `D` | `1`–`31` | Day |
+| `MMMM` | `Januari`, `Februari`, … | Full month name |
+| `MMM` | `Jan`, `Feb`, … | Short month name |
+| `MM` | `01`–`12` | Month (leading zero) |
+| `M` | `1`–`12` | Month |
+| `YYYY` | `2026` | 4-digit year |
+| `YY` | `26` | 2-digit year |
+| `HH` | `00`–`23` | Hours (24h, leading zero) |
+| `H` | `0`–`23` | Hours (24h) |
+| `hh` | `01`–`12` | Hours (12h, leading zero) |
+| `h` | `1`–`12` | Hours (12h) |
+| `mm` | `00`–`59` | Minutes (leading zero) |
+| `m` | `0`–`59` | Minutes |
+| `ss` | `00`–`59` | Seconds (leading zero) |
+| `s` | `0`–`59` | Seconds |
+| `A` | `AM` / `PM` | AM/PM uppercase |
 | `a` | `am` / `pm` | AM/PM lowercase |
-| `Z` | `WIB` | Timezone name (perlu parameter tz) |
+| `Z` | `WIB` | Timezone name (requires tz param) |
 
-### Contoh kombinasi token
+### Token combinations
 
 ```ts
 format(now, 'dddd, DD MMMM YYYY')        // "Kamis, 16 Juli 2026"
@@ -119,67 +119,67 @@ format(now, 'dddd, DD MMMM YYYY HH:mm Z', 'WITA') // "Kamis, 16 Juli 2026 16:30 
 
 ## ⏰ Timezone
 
-Dukung 3 zona waktu Indonesia:
+Supports Indonesia's three timezones:
 
-| Timezone | Offset | Wilayah |
-|----------|--------|---------|
-| `WIB` | UTC+7 | Sumatra, Jawa, Kalimantan Barat, Kalimantan Tengah |
-| `WITA` | UTC+8 | Kalimantan Selatan, Kalimantan Timur, Sulawesi, Bali, NTT, NTB |
+| Timezone | Offset | Region |
+|----------|--------|--------|
+| `WIB` | UTC+7 | Sumatra, Java, West & Central Kalimantan |
+| `WITA` | UTC+8 | South & East Kalimantan, Sulawesi, Bali, NTT, NTB |
 | `WIT` | UTC+9 | Maluku, Papua |
 
 ```ts
 import { format, toTimezone, convertTimezone, TIMEZONE_OFFSETS } from 'indonesian-date'
 
-// Format dengan timezone
+// Format with timezone
 format(new Date(), 'HH:mm Z', 'WITA')    // "16:30 WITA"
 
-// Konversi date ke timezone
+// Convert date to timezone
 const witaDate = toTimezone(new Date(), 'WITA')
 
-// Konversi antar timezone
-convertTimezone(new Date(), 'WIB', 'WITA') // +1 jam
-convertTimezone(new Date(), 'WITA', 'WIT') // +1 jam lagi
+// Convert between timezones
+convertTimezone(new Date(), 'WIB', 'WITA') // +1 hour
+convertTimezone(new Date(), 'WITA', 'WIT') // +1 hour
 
-// Cek offset
-TIMEZONE_OFFSETS.WIB  // 420 (menit)
+// Get offset values
+TIMEZONE_OFFSETS.WIB  // 420 (minutes)
 TIMEZONE_OFFSETS.WITA // 480
 TIMEZONE_OFFSETS.WIT  // 540
 ```
 
 ---
 
-## 📚 API Lengkap
+## 📚 Full API
 
 ### Format
 
-| Fungsi | Return | Contoh |
-|--------|--------|--------|
+| Function | Returns | Example |
+|----------|---------|---------|
 | `format(date, template, tz?)` | `string` | `"Kamis, 16 Juli 2026"` |
 | `formatLong(date, tz?)` | `string` | `"Kamis, 16 Juli 2026"` |
 | `formatFull(date, tz?)` | `string` | `"Kamis, 16 Juli 2026 15:30"` |
 | `formatSlash(date, tz?)` | `string` | `"16/07/2026"` |
 | `formatDateOnly(date, tz?)` | `string` | `"16 Juli 2026"` |
-| `formatTime(date, opts?)` | `string` | `"15:30"` atau `"03:30 PM"` |
+| `formatTime(date, opts?)` | `string` | `"15:30"` or `"03:30 PM"` |
 
 ### Relative Time
 
-| Fungsi | Return | Contoh |
-|--------|--------|--------|
+| Function | Returns | Example |
+|----------|---------|---------|
 | `relativeTime(date, opts?)` | `string` | `"3 hari yang lalu"` |
 
 ### Timezone
 
-| Fungsi | Return | Contoh |
-|--------|--------|--------|
-| `toTimezone(date, tz)` | `Date` | Date adjusted ke timezone |
-| `convertTimezone(date, from, to)` | `Date` | WIB → WITA +1 jam |
+| Function | Returns | Example |
+|----------|---------|---------|
+| `toTimezone(date, tz)` | `Date` | Date adjusted to timezone |
+| `convertTimezone(date, from, to)` | `Date` | WIB → WITA +1h |
 | `getTimezoneName(offsetMinutes)` | `string\|null` | `420` → `"WIB"` |
 | `TIMEZONE_OFFSETS` | `object` | `{ WIB: 420, WITA: 480, WIT: 540 }` |
 
-### Utilitas
+### Utilities
 
-| Fungsi | Return | Contoh |
-|--------|--------|--------|
+| Function | Returns | Example |
+|----------|---------|---------|
 | `getDayName(date)` | `string` | `"Kamis"` |
 | `getMonthName(date)` | `string` | `"Juli"` |
 | `isWeekend(date)` | `boolean` | `false` |
@@ -192,7 +192,7 @@ TIMEZONE_OFFSETS.WIT  // 540
 
 ## 🧑‍💻 TypeScript
 
-Type definitions included out of the box.
+Type definitions are included out of the box.
 
 ```ts
 import type { TimezoneName, TimezoneOffset, DateRange } from 'indonesian-date'
@@ -204,6 +204,6 @@ function greet(date: Date, tz: TimezoneName = 'WIB') {
 
 ---
 
-## 📄 Lisensi
+## 📄 License
 
 MIT © [Abdan Zam Zam Ramadhan](https://github.com/abdanzamzam)
